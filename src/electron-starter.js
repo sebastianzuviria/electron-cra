@@ -3,6 +3,8 @@ const electron = require('electron');
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
+const initPlaywright = require('./main/playwright')
+// const ipcMain = electron.ipcMain
 
 const path = require('path');
 const url = require('url');
@@ -13,7 +15,17 @@ let mainWindow;
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 800, height: 600});
+    mainWindow = new BrowserWindow({
+        width: 800, 
+        height: 600,
+        webPreferences: {
+            nodeIntegration: true,
+            worldSafeExecuteJavaScript: true,
+            enableRemoteModule: true,
+            contextIsolation: true,
+            preload: path.join(__dirname, 'preload.js')
+        }
+    });
 
     const  startUrl = process.env.ELECTRON_START_URL || url.format({
         pathname: path.join(__dirname, '/../build/index.html'),
@@ -60,3 +72,5 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+initPlaywright()
