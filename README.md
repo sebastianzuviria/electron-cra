@@ -1,6 +1,6 @@
 # Electron-React
 
-> Basic configuration to create cross app with Electron and Create-React-App
+> Basic configuration to create cross-platform desktop app with Electron and Create-React-App
 
 ## Running Dev Enviroment
 
