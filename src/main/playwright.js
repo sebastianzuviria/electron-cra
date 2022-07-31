@@ -3,7 +3,7 @@ const { chromium } = require('playwright')
 
 const ipcMain = electron.ipcMain
 
-module.exports = () => {
+module.exports = (mainWindow) => {
     ipcMain.on('playwright', (event, arg) => {
         (async () => {
             const browser = await chromium.launch();
@@ -11,6 +11,7 @@ module.exports = () => {
             const page = await browser.newPage();
             await page.goto('https://google.com/');
             await page.screenshot({ path: `example.png` });
+            mainWindow.webContents.send('test-finish', 'the test has finished')
             await browser.close();
         })();
     })
