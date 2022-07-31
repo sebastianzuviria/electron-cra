@@ -16,6 +16,7 @@ Foreman run dev server and then run electron.
 ## Running Electron with a React build
 
 ```bash
+$ npm run build
 $ npm run electron
 ```
 Electron run /build/index.html
